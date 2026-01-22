@@ -1,0 +1,149 @@
+---
+title: Changelog
+description: Stay updated with the latest releases, new features, and improvements in Oleg Gostev.
+---
+
+## Recent Updates
+
+Stay current with Oleg Gostev's evolution. You receive new capabilities for managing your documentation space, including enhanced organization tools and better integration options.
+
+<Update label="2024-10-20" description="v1.3.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added version history for individual pages, allowing you to revert changes easily.
+- Introduced custom branding options, including support for brand colors like `#3B82F6`.
+- Enabled embeddable documentation widgets for your websites.
+
+## Improvements
+
+- Optimized page load times by `>30%` through better asset caching.
+- Enhanced search functionality with fuzzy matching for quicker results.
+
+</Update>
+
+<Update label="2024-10-05" description="v1.2.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Real-time collaboration: Multiple users can now edit pages simultaneously.
+- Integrated changelog component for automatic release tracking.
+- Added export options to PDF and Markdown bundles.
+
+## Bug Fixes
+
+- Fixed rendering issues with nested code blocks in MDX pages.
+- Resolved authentication errors during long sessions.
+- Corrected table alignment in responsive views.
+
+</Update>
+
+<Update label="2024-09-15" description="v1.1.0" tags={["breaking", "feature"]}>
+
+## Breaking Changes
+
+- Updated configuration schema; migrate your `config.yaml` files as shown below.
+
+## New Features
+
+- Full MDX component support, including interactive elements like Steps and Tabs.
+- Advanced permissions system for team-based documentation.
+
+## Bug Fixes
+
+- Patched security vulnerability in webhook handling.
+
+</Update>
+
+## Migration Guide
+
+Follow these steps to upgrade Oleg Gostev smoothly. Each version includes backward-compatible changes where possible, but review breaking updates.
+
+<Steps>
+  <Step title="Backup Your Data" icon="database">
+    Export your documentation space:
+
+````bash
+ogostev export --space my-docs --format zip
+````
+
+  </Step>
+  <Step title="Update Package" icon="download">
+    Install the latest version:
+
+    <CodeGroup tabs="npm,yarn">
+````bash
+npm install ogostev@latest
+````
+````bash
+yarn add ogostev@latest
+````
+    </CodeGroup>
+  </Step>
+  <Step title="Run Migrations" icon="settings">
+    Apply database migrations:
+
+````bash
+ogostev migrate --version 1.3.0
+````
+
+    For v1.1.0 breaking change, update your config:
+
+````yaml
+# Old config.yaml
+features:
+  mdx: true
+
+# New config.yaml
+features:
+  components:
+    mdx: true
+    interactive: true
+````
+  </Step>
+  <Step title="Verify Installation" icon="check-circle">
+    Test your space:
+
+````bash
+ogostev serve --space my-docs
+````
+
+    Visit `http://localhost:3000` and check changelog renders correctly.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Subscribe to [GitHub releases](https://github.com/oleggostev/docs/ releases) for instant notifications on new versions.
+</Callout>
+
+## Quick Links
+
+<Columns cols={3}>
+  <Card title="GitHub" icon="github" href="https://github.com/oleggostev/docs" target="_blank">
+    View source code and contribute.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Get started with the latest version.
+  </Card>
+  <Card title="Support" icon="help-circle" href="/help-center">
+    Report issues or ask questions.
+  </Card>
+</Columns>
+
+<Expandable title="Detailed v1.1.0 Migration Notes" default-open="false">
+  If you encounter config errors post-upgrade, validate your YAML with:
+
+````bash
+ogostev validate-config config.yaml
+````
+
+  Common fix for permissions:
+
+````javascript
+// Update your auth middleware
+const permissions = {
+  read: true,
+  write: { roles: ["editor", "admin"] }
+};
+````
+</Expandable>
